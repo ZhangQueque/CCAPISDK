@@ -13,9 +13,9 @@
 4、配置格式
 
 SDK的配置格式如下（可参考DEMO中的配置）
-appId
-appSecret
-sign
+   appId
+   appSecret
+   sign
 
 
 5，接入登录方法
