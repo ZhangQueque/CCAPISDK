@@ -1,0 +1,5 @@
+F:\CCAPISDK\CCAPISDK\CCSdk\bin\Debug\CCAPISDK.dll
+F:\CCAPISDK\CCAPISDK\CCSdk\bin\Debug\CCAPISDK.pdb
+F:\CCAPISDK\CCAPISDK\CCSdk\obj\Debug\CCSdk.Common.csprojResolveAssemblyReference.cache
+F:\CCAPISDK\CCAPISDK\CCSdk\obj\Debug\CCAPISDK.dll
+F:\CCAPISDK\CCAPISDK\CCSdk\obj\Debug\CCAPISDK.pdb
