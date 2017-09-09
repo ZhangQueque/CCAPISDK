@@ -43,7 +43,8 @@ namespace CCSdk.Logging
     public ConsoleLog(string name)
     {
       m_Name = name;
-      Console.SetOut(new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true));
+      writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true);
+      //Console.SetOut(new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true));
     }
 
     /// <summary>
@@ -107,8 +108,10 @@ namespace CCSdk.Logging
     /// <param name="message">The message.</param>
     public void Debug(object message)
     {
-      Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, message);
-      Console.Out.Flush();
+     string renderText = InternalLogger.RenderLog(message);
+      writer.WriteLine(m_MessageTemplate, m_Name, m_Debug, renderText);
+      //Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, renderText);
+      writer.FlushAsync();
     }
 
     /// <summary>

@@ -55,7 +55,7 @@
     <Compile Include="Config\ClientsSection.cs" />
     <Compile Include="Config\IniFileEntry.cs" />
     <Compile Include="Config\IniFileManager.cs" />
-    <Compile Include="Config\InternalLogger.cs" />
+    <Compile Include="Util\InternalLogger.cs" />
     <Compile Include="Config\ClientSdkSectionGroup.cs" />
     <Compile Include="Config\MyConfigHandler.cs" />
     <Compile Include="Config\XmlConverter.cs" />
