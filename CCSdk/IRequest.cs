@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,12 +20,15 @@ namespace CCSdk
   /// </summary>
   public interface IRequest
   {
-
+    /// <summary>
+    /// 获取请求提交的方法
+    /// </summary>
+    /// <returns></returns>
+    HttpMethod GetMethod();
   }
 
   public interface IRequest<R> : IRequest where R : ResponseBase
   {
-
+   
   }
-
 }

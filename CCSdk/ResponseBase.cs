@@ -14,6 +14,11 @@ namespace CCSdk
   public abstract class ResponseBase
   {
     /// <summary>
+    /// 请求的Url
+    /// </summary>
+    public string Url { get; set; }
+
+    /// <summary>
     /// 设置或获取响应的内容
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
@@ -42,6 +47,8 @@ namespace CCSdk
     /// 设置或获取响应头
     /// </summary>
     public HttpResponseHeaders Headers { set; get; }
+
+    public string ResponseBody { get; internal set; }
 
     public override string ToString()
     {

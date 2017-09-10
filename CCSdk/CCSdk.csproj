@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CException.cs" />
+    <Compile Include="ClientBase.cs" />
     <Compile Include="ClientFactoryBase.cs" />
     <Compile Include="Config\ClientConfig.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Config\ClientsSection.cs" />
     <Compile Include="Config\IniFileEntry.cs" />
     <Compile Include="Config\IniFileManager.cs" />
+    <Compile Include="IFileDownloadResponse.cs" />
     <Compile Include="Util\InternalLogger.cs" />
     <Compile Include="Config\ClientSdkSectionGroup.cs" />
     <Compile Include="Config\MyConfigHandler.cs" />
