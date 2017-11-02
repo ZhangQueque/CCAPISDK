@@ -14,9 +14,9 @@ namespace CCSdk
 {
   public abstract class ClientBase : IClient
   {
-    protected string AppKey = string.Empty;
-    protected string Secret = string.Empty;
-    protected string Url = string.Empty;
+    internal string serverUrl;
+    internal string appKey;
+    internal string appSecret;
 
     public static HttpClient _httpClient;
 
@@ -25,12 +25,42 @@ namespace CCSdk
       _httpClient = _httpClient ?? new HttpClient();
     }
 
+    public async Task<TResponse> ExecuteAsync<TResponse>(IRequest<TResponse> request) where TResponse : ResponseBase, new()
+    {
+      var responseContent = "";
+      try
+      {
+        var requestUri = GetRequestUri(request);
+        var requestMessage = new HttpRequestMessage(request.GetMethod(), requestUri)
+        {
+          Content = GetRequestContent(request)
+        };
+        var responseMessage = await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+        responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var result = JsonConvert.DeserializeObject<TResponse>(responseContent);
+
+        DownloadFile(result as IDownloadResponse);
+
+        result.Url = requestUri;
+        result.RequestContent = GetRequestBody(request);
+        result.Request = request;
+        result.StatusCode = responseMessage.StatusCode;
+        result.Headers = responseMessage.Headers;
+        result.ResponseBody = responseContent;
+        //Logger.Trace($"{this.GetType().Name},{request.GetApiName()},response:" + responseContent);
+        return result;
+      }
+      catch (Exception ex)
+      {
+        throw new CException($"操作失败,{ex.Message},{responseContent}");
+      }
+    }
+
     public TResponse Execute<TResponse>(IRequest<TResponse> request) where TResponse : ResponseBase, new()
     {
       var responseContent = "";
       try
       {
-
         var requestUri = GetRequestUri(request);
         var requestMessage = new HttpRequestMessage(request.GetMethod(), requestUri)
         {
@@ -40,13 +70,14 @@ namespace CCSdk
         responseContent = responseMessage.Content.ReadAsStringAsync().Result;
         var result = JsonConvert.DeserializeObject<TResponse>(responseContent);
 
-        DownloadFile(result as IFileDownloadResponse);
+        DownloadFile(result as IDownloadResponse);
 
         result.Url = requestUri;
-        result.ResponseBody = GetRequestBody(request);
+        result.Request = request;
+        result.RequestContent = GetRequestBody(request);
         result.StatusCode = responseMessage.StatusCode;
         result.Headers = responseMessage.Headers;
-        result.ResponseContent = responseContent;
+        result.ResponseBody = responseContent;
 
         return result;
       }
@@ -57,7 +88,7 @@ namespace CCSdk
     }
 
 
-    protected virtual void DownloadFile<TResponse>(TResponse response) where TResponse : IFileDownloadResponse
+    protected virtual void DownloadFile<TResponse>(TResponse response) where TResponse : IDownloadResponse
     {
       if (response == null)
         return;
@@ -89,9 +120,9 @@ namespace CCSdk
       {
         var mfdContent = new MultipartFormDataContent();
         var uploadRequest = request as IUploadRequest;
-        if (uploadRequest.File != null && uploadRequest.File.Any())
+        if (uploadRequest.Files != null && uploadRequest.Files.Any())
         {
-          foreach (var f in uploadRequest.File)
+          foreach (var f in uploadRequest.Files)
           {
             if (!File.Exists(f))
               throw new FileNotFoundException($"上传文件未找到,{f}");
@@ -139,7 +170,6 @@ namespace CCSdk
     /// <param name="request"></param>
     /// <returns></returns>
     public abstract string GetSignature(IRequest request);
-
 
     public abstract string ThirdPartyPlatformName { get; }
     /// <summary>

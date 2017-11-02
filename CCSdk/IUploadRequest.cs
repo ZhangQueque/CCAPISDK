@@ -13,6 +13,11 @@ namespace CCSdk
     /// <summary>
     /// 设置或获取上传的文件列表
     /// </summary>
-    string[] File { set; get; }
+    string[] Files { set; get; }
+  }
+
+  internal interface IUploadRequest<T> : IUploadRequest, IRequest<T> where T : ResponseBase
+  {
+    IDictionary<string, FileItem> GetFileParameters();
   }
 }

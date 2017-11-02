@@ -53,7 +53,7 @@ namespace CCSdk.Util
 
     public static string Md54(string text)
     {
-      var password = FormsAuthentication.HashPasswordForStoringInConfigFile(text, "MD5");
+      //var password = FormsAuthentication.HashPasswordForStoringInConfigFile(text, "MD5");
 
       //if (algorithm == null)
       //  throw new ArgumentException("无法识别的加密方式", nameof(text));
@@ -61,7 +61,9 @@ namespace CCSdk.Util
       //var hashByteArray = algorithm.ComputeHash(Encoding.UTF8.GetBytes(text));
       //var password = BitConverter.ToString(hashByteArray).Replace("-", "");
 
-      return password;
+      //return password;
+
+      return string.Empty;
     }
 
 

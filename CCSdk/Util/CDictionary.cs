@@ -9,14 +9,14 @@ namespace CCSdk.Util
   /// <summary>
   /// 封装字典类.
   /// </summary>
-  public class CDictionary : Dictionary<string, string>
+  public class CDictionary : Dictionary<string, object>
   {
     public CDictionary()
     {
 
     }
 
-    public CDictionary(IDictionary<string, string> dictionary)
+    public CDictionary(IDictionary<string, object> dictionary)
         : base(dictionary)
     {
 
@@ -27,7 +27,7 @@ namespace CCSdk.Util
     /// </summary>
     /// <param name="key">键名称</param>
     /// <param name="value">键对应的值，目前支持：string, int, long, double, bool, DateTime类型</param>
-    public void Add(string key, object value)
+    public new void Add(string key, object value)
     {
       string strValue;
 
@@ -68,7 +68,7 @@ namespace CCSdk.Util
       this.Add(key, strValue);
     }
 
-    public new void Add(string key, string value)
+    public void Add(string key, string value)
     {
       if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
       {
