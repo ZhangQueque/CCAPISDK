@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace AcSDK
+namespace CCSdk
 {
   /// <summary>
   /// 客户端异常。

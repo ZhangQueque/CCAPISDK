@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RequestBase.cs" />
     <Compile Include="CException.cs" />
     <Compile Include="ClientBase.cs" />
     <Compile Include="ClientFactoryBase.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Validation\Require.cs" />
     <Compile Include="Validation\Validate.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

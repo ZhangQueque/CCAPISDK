@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CCSdk
 {
@@ -22,18 +23,18 @@ namespace CCSdk
 
     public string AppSecret { get; set; }
 
-    public long ClientId { get; set; }
+    public string ClientId { get; set; }
 
 
     public ClientConfig()
     {
-      Url = Convert.ToString(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["Url"]);
-      AppKey = Convert.ToString(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["AppKey"]);
-      AppSecret =
-          Convert.ToString(
-              ((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["AppSecret"]);
-      ClientId =
-          long.Parse(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client2"))["ClientId"]);
+      Url =  /*Convert.ToString(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["Url"]);*/   "http://localhost:44322/api";
+      AppKey = "500"; // Convert.ToString(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["AppKey"]);
+      AppSecret = "10075";
+          //Convert.ToString(
+          //    ((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client"))["AppSecret"]);
+      ClientId = "10075";
+          //long.Parse(((NameValueCollection)ConfigurationManager.GetSection("ClientList/Client2"))["ClientId"]);
     }
   }
 }

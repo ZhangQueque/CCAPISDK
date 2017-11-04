@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using AcSDK;
 using Newtonsoft.Json;
 using CCSdk;
 
@@ -171,7 +170,6 @@ namespace CCSdk
     /// <returns></returns>
     public abstract string GetSignature(IRequest request);
 
-    public abstract string ThirdPartyPlatformName { get; }
     /// <summary>
     /// 获取数据提交的MediaType
     /// </summary>

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using CCSdk.Util;
 
 namespace CCSdk
 {
@@ -27,7 +28,7 @@ namespace CCSdk
     /// <summary>
     /// 获取所有的Key-Value形式的文本请求参数字典。
     /// </summary>
-    IDictionary<string, object> GetParameters();
+    CDictionary GetParameters();
     /// <summary>
     /// 客户端参数检查，减少服务端无效调用。
     /// </summary>
@@ -44,7 +45,7 @@ namespace CCSdk
     IDictionary<string, string> GetHeaderParameters();
   }
 
-  public interface IRequest<R> : IRequest where R : ResponseBase
+  public interface IRequest<out Response> : IRequest where Response : ResponseBase
   {
   }
 }
