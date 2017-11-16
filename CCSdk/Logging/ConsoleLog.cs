@@ -43,8 +43,8 @@ namespace CCSdk.Logging
     public ConsoleLog(string name)
     {
       m_Name = name;
-      writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true);
-      //Console.SetOut(new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true));
+      //writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true);
+      Console.SetOut(new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logData.log"), true));
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ namespace CCSdk.Logging
     /// <param name="message">The message.</param>
     public void Debug(object message)
     {
-     string renderText = InternalLogger.RenderLog(message);
+      string renderText = InternalLogger.RenderLog(message);
       writer.WriteLine(m_MessageTemplate, m_Name, m_Debug, renderText);
       //Console.WriteLine(m_MessageTemplate, m_Name, m_Debug, renderText);
       writer.FlushAsync();
@@ -214,7 +214,15 @@ namespace CCSdk.Logging
     /// <param name="args">The args.</param>
     public void ErrorFormat(string format, params object[] args)
     {
-      Console.WriteLine(m_MessageTemplate, m_Name, m_Error, string.Format(format, args));
+      StringBuilder s = new StringBuilder();
+      for (int i = 0; i < args.Length; i++)
+      {
+        s.Append(args[i]);
+      }
+
+
+      Console.WriteLine(string.Format(m_MessageTemplate, m_Name, m_Error, s));
+      Console.Out.Flush();
     }
 
     /// <summary>
