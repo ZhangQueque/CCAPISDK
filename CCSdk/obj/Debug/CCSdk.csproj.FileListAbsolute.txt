@@ -7,3 +7,4 @@ F:\CCAPISDK3\CCSdk\bin\Debug\CCSdk.dll
 F:\CCAPISDK3\CCSdk\bin\Debug\CCSdk.pdb
 F:\CCAPISDK3\CCSdk\obj\Debug\CCSdk.dll
 F:\CCAPISDK3\CCSdk\obj\Debug\CCSdk.pdb
+F:\CCAPISDK3\CCSdk\obj\Debug\CCSdk.csprojResolveAssemblyReference.cache

@@ -30,7 +30,7 @@ namespace CCSdk
 
         public DefaultClient(string serverUrl, string appKey, string appSecret)
         {
-            this.appKey = appKey;
+            this.AppKey = appKey;
             this.appSecret = appSecret;
             this.serverUrl = serverUrl;
             this.webUtils = new WebUtils();
@@ -45,8 +45,8 @@ namespace CCSdk
 
         public DefaultClient()
         {
-            this.logger = new ConsoleLogFactory().GetLog("cc");
-            this.webUtils = new WebUtils();
+            //this.logger = new ConsoleLogFactory().GetLog("cc");
+            //this.webUtils = new WebUtils();
         }
 
         public abstract CDictionary InitParameters(CDictionary parameters);
@@ -121,7 +121,7 @@ namespace CCSdk
             }
 
             CDictionary txtParams = new CDictionary(request.GetParameters());
-            txtParams.Add(Constants.METHOD, request.GetApiName());
+            txtParams.Add(Constants.METHOD, request.GetApiName);
             InitParameters(txtParams);
 
 
@@ -145,7 +145,7 @@ namespace CCSdk
                 request.GetHeaderParameters()[Constants.ACCEPT_ENCODING] = Constants.CONTENT_ENCODING_GZIP;
             }
 
-            string realServerUrl = GetServerUrl(this.serverUrl, request.GetApiName(), session);
+            string realServerUrl = GetServerUrl(this.serverUrl, request.GetApiName, session);
             string reqUrl = WebUtils.BuildRequestUrl(realServerUrl, txtParams);
             try
             {
@@ -191,17 +191,17 @@ namespace CCSdk
                 }
 
                 // 追踪错误的请求
-                if (rsp.HaveError)
+                if (!rsp.HaveError)
                 {
                     TimeSpan latency = new TimeSpan(DateTime.Now.Ticks - start);
-                    TraceApiError(appKey, request.GetApiName(), serverUrl, txtParams, latency.TotalMilliseconds, rsp.ResponseBody);
+                    TraceApiError(AppKey, request.GetApiName, serverUrl, txtParams, latency.TotalMilliseconds, rsp.ResponseBody);
                 }
                 return rsp;
             }
             catch (Exception e)
             {
                 TimeSpan latency = new TimeSpan(DateTime.Now.Ticks - start);
-                TraceApiError(appKey, request.GetApiName(), serverUrl, txtParams, latency.TotalMilliseconds, e.GetType() + ": " + e.Message);
+                TraceApiError(AppKey, request.GetApiName, serverUrl, txtParams, latency.TotalMilliseconds, e.GetType() + ": " + e.Message);
                 throw e;
             }
         }
